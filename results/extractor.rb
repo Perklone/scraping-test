@@ -35,6 +35,7 @@ class Extractor
 
       res[:extensions] = [secondary_div] unless secondary_div.empty? || !secondary_div.match?(/^\d{4}$/)
 
+      # Unable to find a way to fetch the image source from the <span><script></script></span> section.
       image = object.css('img').first['data-src']
       res[:image] = image unless image.nil?
 
