@@ -9,6 +9,7 @@ class Extractor
 
     carousel = parsed_html.css('a').select do |link|
       # This is some assumption that the carousel is an <a> tag with an image, and a url that comes with sca_esv
+      # Could break if user is logged in, since the top right GAccount is a <a> that have <img> (same characteristics.)
       # Based on observation, this is quite different from the "People also search for" section where the <a> tag is nested with <div> below it.
       link.css('img').any? && link[:href]&.include?('sca_esv')
     end
