@@ -1,4 +1,4 @@
-require_relative "results/extractor"
+require_relative "services/extractor"
 
 # van-gogh-paintings.html
 test = Extractor.new.extract("files/van-gogh-paintings.html")
