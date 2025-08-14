@@ -17,14 +17,14 @@ class Extractor
     result = { artworks: [] }
 
     carousel.each do |object|
-      name = object.css('img').first[:alt] # since it's an array
-      date_div = object.css('div').find { |div| div.text.match(/^\d{4}$/) }
+      name = object.css('div')[1]
+      date = object.css('div')[2]
       link = "https://www.google.com#{object[:href]}"
 
       # Alternatively, You can do something like
-      # name = object.css.('div')[1]
-      # date = object.css.('div')[2]
-      #
+      # name = object.css('img').first[:alt] # since it's an array
+      # date_div = object.css('div').find { |div| div.text.match(/^\d{4}$/) }
+      # date = date_div&.text
       # but this is brittle and prune to break if the order changes.
       # But the method that I used also can be prone to mistake (if the alt is not properly named.)
 
@@ -33,7 +33,7 @@ class Extractor
         link: link
       }
 
-      date = date_div&.text
+      
       res[:extensions] = [date] unless date.nil?
 
       image = object.css('img').first['data-src']
