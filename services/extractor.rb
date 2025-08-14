@@ -25,8 +25,8 @@ class Extractor
       # name = object.css('img').first[:alt] # since it's an array
       # date_div = object.css('div').find { |div| div.text.match(/^\d{4}$/) }
       # date = date_div&.text
-      # but this is brittle and prune to break if the order changes.
-      # But the method that I used also can be prone to mistake (if the alt is not properly named.)
+      # But this method can break if the alt is not properly named.
+      # But the method that I used also can be prone to mistake (If the carousel changes it's formatting)
 
       res = {
         name: primary_div,
