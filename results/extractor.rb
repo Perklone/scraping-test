@@ -17,8 +17,8 @@ class Extractor
     result = { artworks: [] }
 
     carousel.each do |object|
-      name = object.css('div')[1]
-      date = object.css('div')[2]
+      primary_div = object.css('div')[1].text
+      secondary_div = object.css('div')[2].text # This is not always text on other carousel.
       link = "https://www.google.com#{object[:href]}"
 
       # Alternatively, You can do something like
@@ -29,12 +29,11 @@ class Extractor
       # But the method that I used also can be prone to mistake (if the alt is not properly named.)
 
       res = {
-        name: name,
+        name: primary_div,
         link: link
       }
 
-      
-      res[:extensions] = [date] unless date.nil?
+      res[:extensions] = [secondary_div] unless secondary_div.empty? || !secondary_div.match?(/^\d{4}$/)
 
       image = object.css('img').first['data-src']
       res[:image] = image unless image.nil?
